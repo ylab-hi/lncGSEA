@@ -24,13 +24,7 @@
 #'
 #'
 
-
-library(ggplot2)
-library(RColorBrewer)
-library(ggrepel)
-
-
-plotPath <- function(gsea.df,pathway.list=NULL,direction="both",n=3,...){
+plot_gsea <- function(gsea.df,pathway.list=NULL,direction="both",n=3,...){
 
     # process data for plot ---
     dat <- read.delim(gsea.df, header = TRUE, stringsAsFactors = FALSE, sep = "\t")
