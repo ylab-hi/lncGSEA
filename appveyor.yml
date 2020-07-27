@@ -32,7 +32,8 @@ environment:
 
 
 build_script:
-  - travis-tool.sh install_deps fgsea
+  - travis-tool.sh install_github ctlab/fgsea
+  - travis-tool.sh install_deps
 
 test_script:
   - travis-tool.sh run_tests
