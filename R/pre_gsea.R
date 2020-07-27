@@ -27,15 +27,15 @@ pre_gsea <- function(cohort, t_id){
 
     # interested cohort ---
     cohort <- toupper(cohort)
-    #cohort.file <- paste0("./data/", cohort, ".FPKM.txt")
-    # for test
-    cohort.file <- system.file("extdata", paste0(cohort,".FPKM.txt.gz"), package= "lncGSEA")
+    cohort.file <- paste0("./data/", cohort, ".FPKM.txt")
+
+    # for test -----
+    #cohort.file <- system.file("extdata", paste0(cohort,".FPKM.txt.gz"), package= "lncGSEA")
 
     if (file.exists(cohort.file)) {
     cancer <- as.data.frame(data.table::fread(cohort.file))
     } else {stop(cohort.file, " does not exist!")}
 
-    # test
     # filter out low expressed genes -----
     cancer <- cancer[rowMeans(cancer[,-1])>=1, ]
     rownames(cancer) <- cancer$GeneID
@@ -50,15 +50,15 @@ pre_gsea <- function(cohort, t_id){
     mich <- data.table::fread(system.file("extdata", "mitranscriptome.expr.fpkm_tid.tsv.gz",package = "lncGSEA"))
 
     if (any(grepl(t_id, reflnc[[1]]))) {
-        #dataFiles <- "./data/RefLnc_lncRNA_tumor_sample_FPKM.gz"
-        # for test
-        dataFiles <- system.file("extdata", "RefLnc_lncRNA_tumor_sample_FPKM.gz", package = "lncGSEA")
+        dataFiles <- "./data/RefLnc_lncRNA_tumor_sample_FPKM.gz"
+        # for test ----
+        # dataFiles <- system.file("extdata", "RefLnc_lncRNA_tumor_sample_FPKM.gz", package = "lncGSEA")
         meta <- data.table::fread(system.file("extdata", "tcga.meta.file.txt.gz", package = "lncGSEA"))
 
     } else if (any(grepl(t_id, mich[[1]]))) {
-        # for test
-        dataFiles <- system.file("extdata", "mitranscriptome.expr.fpkm.tsv.gz", package = "lncGSEA")
-        #dataFiles <- "./data/mitranscriptome.expr.fpkm.tsv.gz"
+        # for test ---
+        # dataFiles <- system.file("extdata", "mitranscriptome.expr.fpkm.tsv.gz", package = "lncGSEA")
+        dataFiles <- "./data/mitranscriptome.expr.fpkm.tsv.gz"
         meta <- data.table::fread(system.file("extdata", "library_info.txt.gz", package = "lncGSEA"))
 
     } else { message("Can not find the input t_id in the package database.
