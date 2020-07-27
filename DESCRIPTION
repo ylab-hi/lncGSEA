@@ -38,7 +38,8 @@ Imports:
    ggplot2 (>= 3.3.2),
    RColorBrewer (>= 1.1-2),
    ggrepel (>= 0.8.2),
-   R.utils (>= 2.9.2)
+   R.utils (>= 2.9.2),
+   bit64 (>= 0.9-7)
 Suggests: 
     knitr,
     rmarkdown,
