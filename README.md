@@ -1,8 +1,6 @@
 # lncGSEA
 [![Build Status](https://travis-ci.com/ynren1020/lncGSEA.svg?branch=master)](https://travis-ci.com/ynren1020/lncGSEA)
 
-[![Build status](https://ci.appveyor.com/api/projects/status/s7kxsv678ltwps39/branch/master?svg=true)](https://ci.appveyor.com/project/ynren1020/lncgsea/branch/master)
-
 An R package for linking gene signatures with lncRNA's expression and make prediction of enriched pathways regulated by lncRNAs in human cancer samples
 
 ## Prerequisites
