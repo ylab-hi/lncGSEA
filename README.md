@@ -178,8 +178,8 @@ plot_gsea("PB.69_PRAD_cor.txt")
 
 ```
 
-```{r, echo = FALSE, out.height = "50%", out.width="50%"}
+
 knitr::include_graphics("/Users/yren/Desktop/igf1ras1.example.png")
 
-```
+
 
