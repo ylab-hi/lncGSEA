@@ -109,7 +109,7 @@ The first few rows ranked gene list data frame looks like below:
 By setting `pathway = "HALLMARK_ANDROGEN_RESPONSE"` in `lnc_gsea`, you can have an enrichement plot of AR pathway, which is displayed as below:
 
 ```{r, echo = FALSE, out.height= "50%", out.width="50%" }
-knitr::include_graphics("/Users/yren/Desktop/HALLMARK_ANDROGEN_RESPONSE_ENST00000561519.png")
+knitr::include_graphics("./vignettes/data/HALLMARK_ANDROGEN_RESPONSE_ENST00000561519.png")
 
 ```
 
@@ -122,7 +122,7 @@ plot_gsea("ENST00000561519.5_PRAD_cor.txt")
 ```
 
 ```{r, echo = FALSE, out.height = "50%", out.width="50%"}
-knitr::include_graphics("/Users/yren/Desktop/ARLNC1_plot_example.png")
+knitr::include_graphics("./vignettes/data/ARLNC1_plot_example.png")
 
 ```
 
@@ -147,7 +147,7 @@ plot_multiCompare(arlnc1.df)
 ```
 
 ```{r, echo = FALSE, out.height = "50%", out.width="50%"}
-knitr::include_graphics("/Users/yren/Desktop/ARLNC1_3cohorts_ht.png")
+knitr::include_graphics(./vignettes/data/ARLNC1_3cohorts_ht.png")
 
 ```
 
@@ -164,7 +164,7 @@ plot_multiCompare(prad)
 ```
 
 ```{r, echo = FALSE, out.height = "50%", out.width="50%"}
-knitr::include_graphics("/Users/yren/Desktop/multiple_lncRNA_prad.png")
+knitr::include_graphics("./vignettes/data/multiple_lncRNA_prad.png")
 
 ```
 
@@ -195,7 +195,7 @@ plot_gsea("PB.69_PRAD_cor.txt")
 ```
 
 ```{r, echo = FALSE, out.height = "50%", out.width="50%"}
-knitr::include_graphics("/Users/yren/Desktop/igf1ras1.example.png")
+knitr::include_graphics("./vignettes/data/PB69.example.png")
 
 ```
 
