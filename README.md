@@ -99,12 +99,9 @@ The first few rows ranked gene list data frame looks like below:
     ....
  
  ## Visualization 
- By setting `pathway = "HALLMARK_ANDROGEN_RESPONSE"` in `lnc_gsea`, you can have an enrichement plot of AR pathway, which is displayed as below:
+ By setting `pathway = "HALLMARK_ANDROGEN_RESPONSE"` in `lnc_gsea`, you can have an enrichement plot of AR pathway, which is displayed as below. The plot is produced by `plotEnrichment` function of `fgsea` package.
 
-```{r, echo = FALSE, out.height= "50%", out.width="50%" }
-knitr::include_graphics("/Users/yren/Desktop/HALLMARK_ANDROGEN_RESPONSE_ENST00000561519.png")
 
-```
 
 ### Visualize enriched pathway results by `plot_gsea` on a saved .txt output from `lnc_gsea`
 
