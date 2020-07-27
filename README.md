@@ -56,3 +56,54 @@ The first 4 rows and columns are shown below:
      1760 TCGA-EJ-7125-01A-11R-1965-07            0.7116  18.71 15.37 1.835
      1763 TCGA-ZG-A9LM-01A-11R-A41O-07            0.4569  16.89 29.95 2.484
      1765 TCGA-QU-A6IM-01A-11R-A31N-07            0.0000   8.45  9.04 0.789
+     
+     
+## Run `lnc_gsea` function on output `test`. 
+The default ranking metric is "pearson" correlation coefficient, you can also set cor.method = "spearman" to apply "spearman" correlation coefficient as ranking metric. The other ranking metric is "logFC", which is log2FoldChange between high expressed lncRNA group vs low expressed group. The default geneset is NULL, in this case, `lnc_gsea` will use HALLMARK gene set from MSigDB. You can provide your own customized gene set too, for example, your gene set is stored in a folder called "gmt" at current working directory, geneset can be set as "./gmt/yourgeneset.gmt".
+The pathway enrichement analysis is implemented by fgsea function from R package "fgsea". You can also set genelist = TRUE, to save a ranked gene list data frame for pre-ranked GSEA analysis using GSEA desktop app from Broad Institute. This ranked gene list data frame has two columns, the first column is gene name, the second column is ranking metric, either logFC or correlation coefficient in decreasing order. The main output of this function is the enriched pathways ranked by NES (normalized enrichement score) in a descending order. If you want to visualize an interested pathway, set pathway = "you pathway", an enrichement plot can be saved in your current working directory. 
+
+```
+lnc_gsea(tid_cohort = test, metric = "cor", genelist = TRUE,
+        geneset = NULL,
+        pathway = NULL) 
+
+```
+
+The first few rows output of `lnc_gsea` is shown as below:
+
+    pathway pval    padj    ES      NES     nMoreExtreme    size    leadingEdge
+    HALLMARK_ANDROGEN_RESPONSE      0.00495049504950495     0.0114207400639561           0.557499635112727       2.64517249185999        0       94      ABCC4|RPS6KA3|SMS|PDLIM5|ELL2|ALDH1A3|CAMKK2|KLK3|TPD52|HERC3
+    HALLMARK_FATTY_ACID_METABOLISM  0.00531914893617021     0.0115633672525439      0.414582544119726       2.08586189726878        0       135     ACADL|SMS|BPHL|AADAT|MCEE|ACADM|HSD17B4|DECR1|SLC22A5
+    HALLMARK_OXIDATIVE_PHOSPHORYLATION      0.0072992700729927      0.0139236981342245      0.3653391048645 1.89836259490338        0       182     GLUD1|ACADM|ACADSB|ALDH6A1|MPC1|GOT2|DECR1|PDHX|PRDX3
+    HALLMARK_UNFOLDED_PROTEIN_RESPONSE      0.0050251256281407      0.0114207400639561      0.394156289494017       1.89735321170183        0       106     SLC1A4|TUBB2A|WIPI1|PREB|PDIA5|SSR1|DNAJB9|PSAT1|TARS
+    ....
+    
+The first few rows ranked gene list data frame looks like below:
+
+    gene_name       ranks
+    RP11.314O13.1   0.672201572333335
+    SLC4A4  0.463208163284544
+    RP11.114M1.1    0.457428137420679
+    NUDT4   0.428204695416086
+    LINC00578       0.417863932304566
+    MPC2    0.405784680718824
+    TRPM8   0.403574189464877
+    ABCC4   0.401451566178376
+    AL589822.1      0.392845646974538
+    TRIM36  0.38249804158695
+    CLGN    0.380270202148028
+    POTEH.AS1       0.379078513980204
+    MEAF6   0.368165483665729
+    GLYATL1 0.363674770886263
+    CITED2  0.36312799821486
+    ....
+ 
+ ## Visualization 
+ By setting `pathway = "HALLMARK_ANDROGEN_RESPONSE"` in `lnc_gsea`, you can have an enrichement plot of AR pathway, which is displayed as below:
+
+```{r, echo = FALSE, out.height= "50%", out.width="50%" }
+knitr::include_graphics("/Users/yren/Desktop/HALLMARK_ANDROGEN_RESPONSE_ENST00000561519.png")
+
+```
+
+
