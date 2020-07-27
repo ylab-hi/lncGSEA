@@ -37,7 +37,7 @@ Imports:
    fgsea (>= 1.10.1),
    ggplot2 (>= 3.3.2),
    RColorBrewer (>= 1.1-2),
-   ggrepel (>= 0.8.2)
+   ggrepel (>= 0.8.2),
    R.utils (>= 2.9.2)
 Suggests: 
     knitr,
