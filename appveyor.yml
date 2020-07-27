@@ -18,6 +18,9 @@ environment:
   USE_RTOOLS: true
   global:
      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+
+  matrix:
+  - R_VERSION: patched
   # env vars that may need to be set, at least temporarily, from time to time
   # see https://github.com/krlmlr/r-appveyor#readme for details
 
@@ -26,7 +29,7 @@ environment:
 # Adapt as necessary starting from here
 #R_VERSION: stable
 
-R_VERSION: patched
+
 
 build_script:
   - travis-tool.sh install_deps
