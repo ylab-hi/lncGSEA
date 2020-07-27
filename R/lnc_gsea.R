@@ -6,8 +6,6 @@
 #' from largest to smallest. The pre-ranked file is used for pre-ranked GSEA using fgsea
 #'
 #' @param tid_cohort A output of data frame from pre_gsea function
-#' @param cohort A string of character, showing one of TCGA studies
-#' @param t_id A string of character, showing transcript id, same as pre_gsea
 #' @param metric A string of character, showing which metric is used for rank
 #' @param cor.method "pearson" or "spearman" method for cor metric
 #' @param genelist TRUE or FALSE for output ordered gene list or not
@@ -18,26 +16,31 @@
 #' @import tibble
 #' @import fgsea
 #' @import data.table
+#' @import dplyr
 #'
-#' @return A dataframe showing the GSEA results,if pathway is not null, its enrichment plot
+#' @return A dataframe showing the GSEA results,if pathway is provided, its enrichment plot
 #'         will be produced too.
 #'
 #' @example
-#' lnc_gsea(tid_cohort = test, t_id = "ENST00000430998", cohort = "BRCA",
+#' lnc_gsea(tid_cohort = test,
 #' metric = "logFC", genelist = FALSE,
-#'geneset = "./gmt/h.all.v7.0.symbols.gmt",
-#'pathway = NULL)
+#' geneset = "./gmt/h.all.v7.0.symbols.gmt",
+#' pathway = NULL)
 #'
 #' @export
-#'
-lnc_gsea <- function(tid_cohort, cohort, t_id, metric="cor", cor.method = "pearson", genelist = FALSE, geneset=NULL, pathway = NULL)
-{
-    #tid_cohort <- pre_gsea(cohort, t_id)
 
-    if (metric == "cor") {
+lnc_gsea <- function(tid_cohort, metric=c("cor", "logFC"), cor.method = c("pearson","spearman"), genelist = FALSE, geneset=NULL, pathway = NULL)
+{
+    cohort <- names(tid_cohort)[1]
+    t_id <- names(tid_cohort)[2]
+
+    metric <- match.arg(metric)
+    cor.method <- match.arg(cor.method)
+
+  if (metric == "cor") {
         # correlation -----
         res <- NULL
-        res <- cor(tid_cohort[,2], tid_cohort[,3:ncol(tid_cohort)],
+        res <- stats::cor(tid_cohort[,2], tid_cohort[,3:ncol(tid_cohort)],
                    use = 'pairwise.complete.obs', method = cor.method)
 
         # make res ready for gsea -----
@@ -48,7 +51,8 @@ lnc_gsea <- function(tid_cohort, cohort, t_id, metric="cor", cor.method = "pears
         res<-res[order(-res[,2]),]
         ranks <- tibble::deframe(res)
 
-    } else {
+    }
+  if (metric == "logFC") {
         tid_cohort$group <- ifelse(tid_cohort[[2]] > median(tid_cohort[[2]]), "high", "low")
         # by group, calculate mean for each gene ---
         res <- aggregate(. ~ group, data = tid_cohort[, -c(1:2)], FUN = mean)
@@ -74,20 +78,21 @@ lnc_gsea <- function(tid_cohort, cohort, t_id, metric="cor", cor.method = "pears
     }
     # Load the pathways into a named list-----
     if (is.null(geneset)){
-        geneset <- system.file("extdata", "h.all.v7.0.symbols.gmt", package = "slncGSEA")
+        geneset <- system.file("extdata", "h.all.v7.0.symbols.gmt", package = "lncGSEA")
     }
 
     pathways.hallmark <- fgsea::gmtPathways(geneset) # gmt
 
     fgseaRes <- fgsea::fgsea(pathways=pathways.hallmark, stats=ranks, nperm=1000)
-
+    print(fgseaRes)
     # tidy the results -----
-    fgseaResTidy <- fgseaRes[order(-NES,padj),]
-    print(fgseaResTidy)
+    #fgseaResTidy <- fgseaRes[base::order(-NES,padj),]
+     fgseaResTidy <- dplyr::arrange(fgseaRes,desc(NES),padj)
+
     data.table::fwrite(fgseaResTidy, paste0(t_id, "_", cohort, "_", metric, ".txt"),
                        col.names = TRUE, row.names = FALSE, sep = "\t", quote = FALSE)
 
-
+    return(fgseaResTidy)
     # gsea plot -----
 
     if(!is.null(pathway)){
