@@ -5,11 +5,11 @@
 #' @param pathway.list Pathways user provided to label, a character variable
 #' @param direction A string, "pos" or "neg" or "both" to label positive or negative or both enriched pathways
 #' @param n A number, defining how many pos or neg or both pathways to label
-#' @param ... other parameters to adjust plot
 #'
 #' @import ggplot2
 #' @import RColorBrewer
 #' @import ggrepel
+#' @import dplyr
 #'
 #' @return A pdf plot with NES as y axis and sign(NES)*(-log10(FDR)) as x axis
 #'
@@ -21,10 +21,9 @@
 #' test <- plot_gsea("ENST00000417354_OV_cor_hallmark.txt")
 #'
 #' @export
-#'
-#'
 
-plot_gsea <- function(gsea.df,pathway.list=NULL,direction="both",n=3,...){
+
+plot_gsea <- function(gsea.df,pathway.list=NULL,direction=c("both","pos","neg"),n=3){
 
     # process data for plot ---
     dat <- read.delim(gsea.df, header = TRUE, stringsAsFactors = FALSE, sep = "\t")
@@ -33,6 +32,8 @@ plot_gsea <- function(gsea.df,pathway.list=NULL,direction="both",n=3,...){
     dat$logP <- -log10(dat$padj + 0.00001)
     dat$logP.sign <- sign(dat$NES)*dat$logP
 
+    direction <- match.arg(direction)
+
     # pathway to label ---
     if (is.null(pathway.list)) {
         if (direction == "both"){
@@ -40,9 +41,11 @@ plot_gsea <- function(gsea.df,pathway.list=NULL,direction="both",n=3,...){
             label.min <- slice_min(dat, order_by = NES, n=n)
             label <- rbind(label.max, label.min)
 
-        } else if (direction == "pos"){
+        }
+        if (direction == "pos"){
             label <- slice_max(dat, order_by = NES, n=n)
-        } else {
+        }
+        if (direction == "neg") {
             label <- slice_min(dat, order_by = NES, n=n)
         }
     } else {
