@@ -106,4 +106,89 @@ knitr::include_graphics("/Users/yren/Desktop/HALLMARK_ANDROGEN_RESPONSE_ENST0000
 
 ```
 
+### Visualize enriched pathway results by `plot_gsea` on a saved .txt output from `lnc_gsea`
+
+One can provide a customized gene pathways to be labelled in the plot by setting pathway.list = "pathway you want to label", the name of the gene pathways should be the same as the pathways in the gene set gmt file you have used in `lnc_gsea`. For example, if you want to label "HALLMARK_ANDROGEN_RESPONSE", you can set pathway.list = "HALLMARK_ANDROGEN_RESPONSE", or if you want to label multiple pathways, you can set pathway.list = c("HALLMARK_ANDROGEN_RESPONSE", "HALLMARK_FATTY_ACID_METABOLISM"). If pathway.list = NULL, by default, it will label top/bottom 3 pathways. You can choose how many pathways you want to label by n, by default n = 3. You also have the flexibility of choosing positive ("pos") or negative ("neg") or both ("both") enriched pathways to label. 
+
+```
+plot_gsea("ENST00000561519.5_PRAD_cor.txt")
+```
+
+```{r, echo = FALSE, out.height = "50%", out.width="50%"}
+knitr::include_graphics("/Users/yren/Desktop/ARLNC1_plot_example.png")
+
+```
+
+### Compare one lncRNA's regulated pathways in different studies 
+
+If you have not run lnc_gsea for your interested lncRNA in multiple studies, you can obtain those results by running `pre_compareCohort` function, the output of this function
+can be directly used by function `plot_compareCohort`, which will produce a plot shown below. If you have already enriched pathways results for the interested lncRNA in multiple studies, you can apply function `pre_multiCohort`, and then feed the output to 
+`plot_compareCohort` to obtain plot like below.
+
+Suppose we want to compare the difference of enriched pathways for transcript "ENST00000561519" of ARLNC1 in prostate, lung and breast cancer.
+
+```
+# run from the scratch 
+cohorts <- c("PRAD","LUAD","BRCA")
+arlnc1.df <- pre_compareCohort(lncRNA="ENST00000561519", cohorts = cohorts)
+# already have lnc_gsea output 
+arlnc1.df <- pre_multiCompare(files = list("ENST00000561519_PRAD_cor.txt",
+                                          "ENST00000561519_LUAD_cor.txt",
+                                          "ENST00000561519_BRCA_cor.txt"),
+                              compare = "cohort")
+plot_multiCompare(arlnc1.df)
+
+```
+
+```{r, echo = FALSE, out.height = "50%", out.width="50%"}
+knitr::include_graphics("/Users/yren/Desktop/ARLNC1_3cohorts_ht.png")
+
+```
+
+### Study multiple lncRNAs' regulatory pathway in one cancer 
+
+Similarly, one can collectively compare multiple lncRNAs regulatory enriched pathway in one cancer. Here suppose you already have results from `lnc_gsea` for the list of interested lncRNAs. You can obtain a similar plot by running the following functions:
+
+```{r, eval = FALSE}
+prad <- pre_multiCompare(files = list("ENST00000625256_PRAD_cor.txt",
+                                  "ENST00000561978_PRAD_cor.txt",
+                                  "ENST00000561519_PRAD_cor.txt"),
+                         compare = "lncRNA")
+plot_multiCompare(prad)
+```
+
+```{r, echo = FALSE, out.height = "50%", out.width="50%"}
+knitr::include_graphics("/Users/yren/Desktop/multiple_lncRNA_prad.png")
+
+```
+
+## lncRNA expression matrix provided by user
+
+Example customized lncRNA expression data frame or matrix should look like this:
+
+                TCGA-ZG-A9LM-01A-11R-A41O-07 TCGA-V1-A8WW-01A-11R-A37L-07 ...
+    PB.69                       0.0632                       0.0234       ...
+
+Example of other genes' expression data should look like below:
+
+                TCGA-ZG-A9LM-01A-11R-A41O-07 TCGA-V1-A8WW-01A-11R-A37L-07 ...
+    TSPAN6                       16.892                       12.081      ...
+    DPM1                         29.951                       25.948      ...
+    SCYL3                         2.484                        4.688      ...
+    FGR                           0.956                        0.899      ...
+    CFH                           2.961                        1.490      ...
+    
+The most important tips for combining these two data frames by `custom_lnc` is the column names from both data frames should be the same for the same person. However, the orders of the columns or the numbers of the columns can be different. 
+
+```
+lnctest <- custom_lnc("lncRNA.custom.txt","../PRAD.FPKM.txt")
+lnc_gsea(tid_cohort = lnctest, geneset = "./gmt/h.all.v7.0.symbols.gmt")
+plot_gsea("PB.69_PRAD_cor.txt")
+
+```
+
+```{r, echo = FALSE, out.height = "50%", out.width="50%"}
+knitr::include_graphics("/Users/yren/Desktop/igf1ras1.example.png")
+
+```
 
