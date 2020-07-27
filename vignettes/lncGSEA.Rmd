@@ -54,7 +54,7 @@ test <- pre_gsea("PRAD", "ENST00000561519")
 test[1:4, 1:4]
 ```
 
-The first 5 rows and columns are shown below:
+The first 4 rows and columns are shown below:
     
 
 
@@ -69,9 +69,8 @@ The first 5 rows and columns are shown below:
 The default ranking metric is "pearson" correlation coefficient, you can also set cor.method = "spearman" to apply "spearman" correlation coefficient as ranking metric. The other ranking metric is "logFC", which is log2FoldChange between high expressed lncRNA group vs low expressed group. The default geneset is NULL, in this case, `lnc_gsea` will use HALLMARK gene set from MSigDB. You can provide your own customized gene set too, for example, your gene set is stored in a folder called "gmt" at current working directory, geneset can be set as "./gmt/yourgeneset.gmt".
 The pathway enrichement analysis is implemented by fgsea function from R package "fgsea". You can also set genelist = TRUE, to save a ranked gene list data frame for pre-ranked GSEA analysis using GSEA desktop app from Broad Institute. This ranked gene list data frame has two columns, the first column is gene name, the second column is ranking metric, either logFC or correlation coefficient in decreasing order. The main output of this function is the enriched pathways ranked by NES (normalized enrichement score) in a descending order. If you want to visualize an interested pathway, set pathway = "you pathway", an enrichement plot can be saved in your current working directory. 
 ```{r, eval = FALSE}
-lnc_gsea(tid_cohort = test, metric = "cor", genelist = TRUE,
-        geneset = NULL,
-        pathway = NULL) 
+lnc_gsea(tid_cohort = test, metric = "cor", cor.method = "pearson", 
+         genelist = TRUE, geneset = NULL, pathway = NULL) 
 
 ```
 
@@ -190,10 +189,7 @@ The most important tips for combining these two data frames by `custom_lnc` is t
 
 ```{r, eval = FALSE}
 lnctest <- custom_lnc("lncRNA.custom.txt","../PRAD.FPKM.txt")
-
-
-
-lnc_gsea(tid_cohort = lnctest, geneset = "./gmt/h.all.v7.0.symbols.gmt")
+lnc_gsea(tid_cohort = lnctest, metric = "cor", cor.method = "pearson")
 plot_gsea("PB.69_PRAD_cor.txt")
 
 ```
