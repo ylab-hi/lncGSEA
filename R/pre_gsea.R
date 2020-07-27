@@ -27,31 +27,39 @@ pre_gsea <- function(cohort, t_id){
 
     # interested cohort ---
     cohort <- toupper(cohort)
-    cancer <- as.data.frame(data.table::fread(paste0("./data/",
-                                                     cohort, ".FPKM.txt")))
-    #cohort <- as.data.frame(data.table::fread(system.file("extdata", paste0(cohort,".FPKM.txt.gz"), package= "slncGSEA")))
+    #cohort.file <- paste0("./data/", cohort, ".FPKM.txt")
+    # for test
+    cohort.file <- system.file("extdata", paste0(cohort,".FPKM.txt.gz"), package= "lncGSEA")
 
+    if (file.exists(cohort.file)) {
+    cancer <- as.data.frame(data.table::fread(cohort.file))
+    } else {stop(cohort.file, " does not exist!")}
 
+    # test
     # filter out low expressed genes -----
     cancer <- cancer[rowMeans(cancer[,-1])>=1, ]
     rownames(cancer) <- cancer$GeneID
     cancer$GeneID <- NULL
+
+
     # transpose ---
     cancerT <- as.data.frame(t(cancer))
     cancerT <- data.frame(patient_id = row.names(cancerT), cancerT)
     # interested t_id ---
-    reflnc <- data.table::fread(system.file("extdata", "RefLnc_lncRNA_tumor_sample_FPKM_tid.gz",package = "slncGSEA"))
-    mich <- data.table::fread(system.file("extdata", "mitranscriptome.expr.fpkm_tid.tsv",package = "slncGSEA"))
+    reflnc <- data.table::fread(system.file("extdata", "RefLnc_lncRNA_tumor_sample_FPKM_tid.gz",package = "lncGSEA"))
+    mich <- data.table::fread(system.file("extdata", "mitranscriptome.expr.fpkm_tid.tsv.gz",package = "lncGSEA"))
 
     if (any(grepl(t_id, reflnc[[1]]))) {
-        dataFiles <- "./data/RefLnc_lncRNA_tumor_sample_FPKM.gz"
-        #dataFiles <- system.file("extdata", "RefLnc_lncRNA_tumor_sample_FPKM.gz", package = "slncGSEA")
-        meta <- data.table::fread(system.file("extdata", "tcga.meta.file.txt.gz", package = "slncGSEA"))
+        #dataFiles <- "./data/RefLnc_lncRNA_tumor_sample_FPKM.gz"
+        # for test
+        dataFiles <- system.file("extdata", "RefLnc_lncRNA_tumor_sample_FPKM.gz", package = "lncGSEA")
+        meta <- data.table::fread(system.file("extdata", "tcga.meta.file.txt.gz", package = "lncGSEA"))
 
     } else if (any(grepl(t_id, mich[[1]]))) {
-        #dataFiles <- system.file("extdata", "mitranscriptome.expr.fpkm.tsv.gz", package = "slncGSEA")
-        dataFiles <- "./data/mitranscriptome.expr.fpkm.tsv.gz"
-        meta <- data.table::fread(system.file("extdata", "library_info.txt.gz", package = "slncGSEA"))
+        # for test
+        dataFiles <- system.file("extdata", "mitranscriptome.expr.fpkm.tsv.gz", package = "lncGSEA")
+        #dataFiles <- "./data/mitranscriptome.expr.fpkm.tsv.gz"
+        meta <- data.table::fread(system.file("extdata", "library_info.txt.gz", package = "lncGSEA"))
 
     } else { message("Can not find the input t_id in the package database.
                      Users should provide their lncRNAs expression matrix for
@@ -88,7 +96,7 @@ pre_gsea <- function(cohort, t_id){
                                                by = c("tcga_legacy_sample_id" = "patient_id")))
     }
 
-    names(tid_cohort)[1] <- "patient_id"
+    names(tid_cohort)[1] <- cohort
     if (nrow(tid_cohort) > 0){
         return(tid_cohort)
     } else {message("There are 0 rows in the dataframe, please try another cohort.")}
