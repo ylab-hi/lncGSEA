@@ -114,10 +114,9 @@ One can provide a customized gene pathways to be labelled in the plot by setting
 plot_gsea("ENST00000561519.5_PRAD_cor.txt")
 ```
 
-```
+
 ![ARLNC1_plot_example](https://user-images.githubusercontent.com/25854857/88563135-387fe900-cff7-11ea-98c4-43f7498e7900.png)
 
-```
 
 ### Compare one lncRNA's regulated pathways in different studies 
 
