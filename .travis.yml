@@ -2,3 +2,5 @@
 warnings_are_errors: false
 language: R
 cache: packages
+
+r_github_packages: ctlab/fgsea
