@@ -63,9 +63,7 @@ The default ranking metric is "pearson" correlation coefficient, you can also se
 The pathway enrichement analysis is implemented by fgsea function from R package "fgsea". You can also set genelist = TRUE, to save a ranked gene list data frame for pre-ranked GSEA analysis using GSEA desktop app from Broad Institute. This ranked gene list data frame has two columns, the first column is gene name, the second column is ranking metric, either logFC or correlation coefficient in decreasing order. The main output of this function is the enriched pathways ranked by NES (normalized enrichement score) in a descending order. If you want to visualize an interested pathway, set pathway = "you pathway", an enrichement plot can be saved in your current working directory. 
 
 ```
-lnc_gsea(tid_cohort = test, metric = "cor", genelist = TRUE,
-        geneset = NULL,
-        pathway = NULL) 
+lnc_gsea(tid_cohort = test, metric = "cor", cor.method = "pearson", genelist = TRUE, geneset = NULL, pathway = NULL) 
 
 ```
 
@@ -109,7 +107,7 @@ The first few rows ranked gene list data frame looks like below:
 One can provide a customized gene pathways to be labelled in the plot by setting pathway.list = "pathway you want to label", the name of the gene pathways should be the same as the pathways in the gene set gmt file you have used in `lnc_gsea`. For example, if you want to label "HALLMARK_ANDROGEN_RESPONSE", you can set pathway.list = "HALLMARK_ANDROGEN_RESPONSE", or if you want to label multiple pathways, you can set pathway.list = c("HALLMARK_ANDROGEN_RESPONSE", "HALLMARK_FATTY_ACID_METABOLISM"). If pathway.list = NULL, by default, it will label top/bottom 3 pathways. You can choose how many pathways you want to label by n, by default n = 3. You also have the flexibility of choosing positive ("pos") or negative ("neg") or both ("both") enriched pathways to label. 
 
 ```
-plot_gsea("ENST00000561519.5_PRAD_cor.txt")
+plot_gsea("ENST00000561519.5_PRAD_cor.txt", direction = "both")
 ```
 
 
@@ -172,8 +170,8 @@ Example of other genes' expression data should look like below:
 The most important tips for combining these two data frames by `custom_lnc` is the column names from both data frames should be the same for the same person. However, the orders of the columns or the numbers of the columns can be different. 
 
 ```
-lnctest <- custom_lnc("lncRNA.custom.txt","../PRAD.FPKM.txt")
-lnc_gsea(tid_cohort = lnctest, geneset = "./gmt/h.all.v7.0.symbols.gmt")
+lnctest <- custom_lnc("./data/lncRNA.custom.txt","./data/PRAD.FPKM.txt")
+lnc_gsea(tid_cohort = lnctest, metric = "cor",cor.method = "pearson")
 plot_gsea("PB.69_PRAD_cor.txt")
 
 ```
