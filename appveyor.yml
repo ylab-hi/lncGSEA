@@ -24,7 +24,7 @@ environment:
   # R_REMOTES_STANDALONE: true
 
 # Adapt as necessary starting from here
-R_VERSION: stable
+#R_VERSION: stable
 
 R_VERSION: patched
 
