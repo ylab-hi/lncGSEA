@@ -147,7 +147,7 @@ plot_multiCompare(arlnc1.df)
 ```
 
 ```{r, echo = FALSE, out.height = "50%", out.width="50%"}
-knitr::include_graphics(./vignettes/data/ARLNC1_3cohorts_ht.png")
+knitr::include_graphics("./vignettes/data/ARLNC1_3cohorts_ht.png")
 
 ```
 
@@ -196,6 +196,5 @@ plot_gsea("PB.69_PRAD_cor.txt")
 
 ```{r, echo = FALSE, out.height = "50%", out.width="50%"}
 knitr::include_graphics("./vignettes/data/PB69.example.png")
-
 ```
 
