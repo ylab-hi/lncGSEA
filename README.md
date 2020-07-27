@@ -151,10 +151,7 @@ prad <- pre_multiCompare(files = list("ENST00000625256_PRAD_cor.txt",
 plot_multiCompare(prad)
 ```
 
-```{r, echo = FALSE, out.height = "50%", out.width="50%"}
-knitr::include_graphics("/Users/yren/Desktop/multiple_lncRNA_prad.png")
-
-```
+![multiple_lncRNA_prad](https://user-images.githubusercontent.com/25854857/88564437-d58f5180-cff8-11ea-860d-21a387124036.png)
 
 ## lncRNA expression matrix provided by user
 
