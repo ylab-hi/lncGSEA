@@ -27,3 +27,12 @@ There are two kinds of datasets required for `lncGSEA` to perform its function o
   - Example: PRAD.FPKM.txt, BRCA.FPKM.txt, COAD.FPKM.txt
 
 All datasets can be downloaded from this shared link:
+
+## Create a data folder in your current working directory
+Please create a data folder by the following command to store the downloaded datasets.
+
+```
+if (!file.exists("data")){
+    dir.create("data")
+}
+```
