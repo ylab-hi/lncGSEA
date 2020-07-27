@@ -178,7 +178,7 @@ plot_gsea("PB.69_PRAD_cor.txt")
 
 ```
 
-![igf1ras1 example](https://user-images.githubusercontent.com/25854857/88564673-1b4c1a00-cff9-11ea-9f11-c5b26de15fa9.png)
+![PB69 example](https://user-images.githubusercontent.com/25854857/88564875-66662d00-cff9-11ea-9f92-31a577d90ff4.png)
 
 
 
