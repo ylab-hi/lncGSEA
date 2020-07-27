@@ -6,9 +6,7 @@
 \usage{
 lnc_gsea(
   tid_cohort,
-  cohort,
-  t_id,
-  metric = "cor",
+  metric = c("cor", "logFC"),
   cor.method = "pearson",
   genelist = FALSE,
   geneset = NULL,
@@ -17,10 +15,6 @@ lnc_gsea(
 }
 \arguments{
 \item{tid_cohort}{A output of data frame from pre_gsea function}
-
-\item{cohort}{A string of character, showing one of TCGA studies}
-
-\item{t_id}{A string of character, showing transcript id, same as pre_gsea}
 
 \item{metric}{A string of character, showing which metric is used for rank}
 
@@ -33,7 +27,7 @@ lnc_gsea(
 \item{pathway}{A string of character, showing one of pathway in the gmt file}
 }
 \value{
-A dataframe showing the GSEA results,if pathway is not null, its enrichment plot
+A dataframe showing the GSEA results,if pathway is provided, its enrichment plot
         will be produced too.
 }
 \description{

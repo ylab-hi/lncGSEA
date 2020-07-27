@@ -6,7 +6,13 @@
 A function to plot enriched pathways, y axis is normalized enrichment
 score, x axis is sign(NES)*(-log10(FDR))}
 \usage{
-plot_gsea(gsea.df, pathway.list = NULL, direction = "both", n = 3, ...)
+plot_gsea(
+  gsea.df,
+  pathway.list = NULL,
+  direction = c("both", "pos", "neg"),
+  n = 3,
+  ...
+)
 }
 \arguments{
 \item{gsea.df}{A data frame, output from sg_gsea function}
