@@ -27,7 +27,7 @@ library(lncGSEA)
 There are two kinds of datasets required for `lncGSEA` to perform its function of finding enriched pathways regulated by lncRNAs.
 - lncRNA expression in human cancer samples. 
   - Two public database: mitranscriptome beta and RefLnc. The files were named as "mitranscriptome.expr.fpkm.tsv.gz" (can be downloaded at https://drive.google.com/file/d/15ZucdNxAUT5ZfZZxHBEZ6Q7UvEVjeYfL/view?usp=sharing) and "RefLnc_lncRNA_tumor_sample_FPKM.gz" (download link https://drive.google.com/file/d/1OWyqJlGnN7V0gRh7B-BOIwJSJJ57Zla0/view?usp=sharing), respectively. 
-- gene expression matrix for each cohort in TCGA study.
+- gene expression matrix (FPKM) for each cohort in TCGA study.
   - Example: PRAD.FPKM.txt, BRCA.FPKM.txt, COAD.FPKM.txt
 
 All datasets can be downloaded from this shared link:
@@ -43,7 +43,7 @@ if (!file.exists("data")){
 
 ## Examples
 
-Create an expression data frame for PRAD cohort, columns are one of transcripts of ARLNC1 (e.g. ENST00000561519) and other genes. Rows are tumor samples from PRAD cohort. The first column name must be the cohort name one use in `pre_gsea` and the second column name is the transcript id. A same transcript id may have different versions, `pre_gsea` use transcript id without version number ("ENST00000561519" instead of "ENST00000561519.[0-9]"). 
+Create an expression data frame for PRAD cohort, columns are one of transcripts of ARLNC1 (e.g. ENST00000561519) and other genes. Rows are tumor samples from PRAD cohort. The first column name of output should be the cohort name one use in `pre_gsea` and the second column name should be the transcript id. A same transcript id may have different versions, `pre_gsea` use transcript id without version number ("ENST00000561519" instead of "ENST00000561519.[0-9]"). 
 
 ```
 test <- pre_gsea("PRAD", "ENST00000561519")
@@ -64,7 +64,7 @@ The first 4 rows and columns are shown below:
      
 ## Run `lnc_gsea` function on output `test`. 
 The default ranking metric is "pearson" correlation coefficient, you can also set cor.method = "spearman" to apply "spearman" correlation coefficient as ranking metric. The other ranking metric is "logFC", which is log2FoldChange between high expressed lncRNA group vs low expressed group. The default geneset is NULL, in this case, `lnc_gsea` will use HALLMARK gene set from MSigDB. You can provide your own customized gene set too, for example, your gene set is stored in a folder called "gmt" at current working directory, geneset can be set as "./gmt/yourgeneset.gmt".
-The pathway enrichement analysis is implemented by fgsea function from R package "fgsea". You can also set genelist = TRUE, to save a ranked gene list data frame for pre-ranked GSEA analysis using GSEA desktop app from Broad Institute. This ranked gene list data frame has two columns, the first column is gene name, the second column is ranking metric, either logFC or correlation coefficient in decreasing order. The main output of this function is the enriched pathways ranked by NES (normalized enrichement score) in a descending order. If you want to visualize an interested pathway, set pathway = "you pathway", an enrichement plot can be saved in your current working directory. 
+The pathway enrichement analysis is implemented by `fgsea` function from R package "fgsea". You can also set genelist = TRUE, to save a ranked gene list data frame for pre-ranked GSEA analysis using GSEA desktop app from Broad Institute. This ranked gene list data frame has two columns, the first column is gene name, the second column is ranking metric, either logFC or correlation coefficient in decreasing order. The main output of this function is the enriched pathways ranked by NES (normalized enrichement score) in a descending order. If you want to visualize an interested pathway, set pathway = "you pathway", an enrichement plot can be saved in your current working directory. 
 
 ```
 lnc_gsea(tid_cohort = test, metric = "cor", cor.method = "pearson", genelist = TRUE, geneset = NULL, pathway = NULL) 
@@ -100,8 +100,9 @@ The first few rows ranked gene list data frame looks like below:
     CITED2  0.36312799821486
     ....
  
- ## Visualization 
- By setting `pathway = "HALLMARK_ANDROGEN_RESPONSE"` in `lnc_gsea`, you can have an enrichement plot of AR pathway, which is displayed as below. The plot is produced by `plotEnrichment` function of `fgsea` package.
+## Visualization 
+
+By setting `pathway = "HALLMARK_ANDROGEN_RESPONSE"` in `lnc_gsea`, you can have an enrichement plot of AR pathway, which is displayed as below. The plot is produced by `plotEnrichment` function of `fgsea` package.
 
 <img width="576" alt="Screen Shot 2020-07-27 at 10 59 42 AM" src="https://user-images.githubusercontent.com/25854857/88564082-66196200-cff8-11ea-90b4-47c93d59c303.png">
 
@@ -121,10 +122,10 @@ plot_gsea("ENST00000561519.5_PRAD_cor.txt", direction = "both")
 ### Compare one lncRNA's regulated pathways in different studies 
 
 If you have not run lnc_gsea for your interested lncRNA in multiple studies, you can obtain those results by running `pre_compareCohort` function, the output of this function
-can be directly used by function `plot_compareCohort`, which will produce a plot shown below. If you have already enriched pathways results for the interested lncRNA in multiple studies, you can apply function `pre_multiCohort`, and then feed the output to 
+can be directly used by function `plot_compareCohort`, which will produce a plot shown below. If you already have enriched pathways results for the interested lncRNA in multiple studies, you can apply function `pre_multiCohort`, and then feed the output to 
 `plot_compareCohort` to obtain plot like below.
 
-Suppose we want to compare the difference of enriched pathways for transcript "ENST00000561519" of ARLNC1 in prostate, lung and breast cancer.
+Suppose one wants to compare the difference of enriched pathways for transcript "ENST00000561519" of ARLNC1 in prostate, lung and breast cancer.
 
 ```
 # run from the scratch 
@@ -143,7 +144,7 @@ plot_multiCompare(arlnc1.df)
 
 ### Study multiple lncRNAs' regulatory pathway in one cancer 
 
-Similarly, one can collectively compare multiple lncRNAs regulatory enriched pathway in one cancer. Here suppose you already have results from `lnc_gsea` for the list of interested lncRNAs. You can obtain a similar plot by running the following functions:
+Similarly, you can collectively compare multiple lncRNAs regulatory enriched pathway in one cancer. Here suppose you already have results from `lnc_gsea` for the list of interested lncRNAs. You can obtain a similar plot by running the following functions:
 
 ```{r, eval = FALSE}
 prad <- pre_multiCompare(files = list("ENST00000625256_PRAD_cor.txt",
@@ -156,8 +157,9 @@ plot_multiCompare(prad)
 ![multiple_lncRNA_prad](https://user-images.githubusercontent.com/25854857/88564437-d58f5180-cff8-11ea-860d-21a387124036.png)
 
 ## lncRNA expression matrix provided by user
+If you have your an interested lncRNA which has not been included in those two databases yet, you can provide your own customized lncRNA expression matrix in TCGA cohorts. 
 
-Example customized lncRNA expression data frame or matrix should look like this:
+An example of the customized lncRNA expression data frame or matrix should look like:
 
                 TCGA-ZG-A9LM-01A-11R-A41O-07 TCGA-V1-A8WW-01A-11R-A37L-07 ...
     PB.69                       0.0632                       0.0234       ...
@@ -171,7 +173,7 @@ Example of other genes' expression data should look like below:
     FGR                           0.956                        0.899      ...
     CFH                           2.961                        1.490      ...
     
-The most important tips for combining these two data frames by `custom_lnc` is the column names from both data frames should be the same for the same person. However, the orders of the columns or the numbers of the columns can be different. 
+The most important tip for combining these two data frames by `custom_lnc` is the column names from both data frames should be the same for the same person. However, the order of the columns or the numbers of the columns can be different. 
 
 ```
 lnctest <- custom_lnc("./data/lncRNA.custom.txt","./data/PRAD.FPKM.txt")
