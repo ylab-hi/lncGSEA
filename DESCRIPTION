@@ -1,6 +1,6 @@
 Package: lncGSEA
 Type: Package
-Title: lncRNA associated Gene Set Enrichement Analysis
+Title: lncRNA Associated Gene Set Enrichement Analysis
 Version: 0.1.0
 Author: 
      c(person(given = "Yanan",
