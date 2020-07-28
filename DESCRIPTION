@@ -1,6 +1,6 @@
 Package: lncGSEA
 Type: Package
-Title: An R Package to Infer lncRNA Associated Pathways from Large-scale Cancer Transcriptome Sequencing Data
+Title: lncRNA associated Gene Set Enrichement Analysis
 Version: 0.1.0
 Author: 
      c(person(given = "Yanan",
@@ -27,7 +27,11 @@ Author:
            )
            )
 Maintainer: Yanan Ren <renxx275@umn.edu>
-Description: lncGSEA, a new tool to link gene signatures with a lncRNA expression in tumor patient samples from the TCGA study. It is capable to identify enriched pathways regulated by lncRNAs in human cancers.
+Description: An R Package to infer lncRNA associated pathways from Large-scale 
+             cancer transcriptome sequencing data by using two metrics to link 
+             gene signatures with a lncRNA expression in tumor patient samples 
+             from the TCGA study. It is capable of identifying enriched pathways
+             regulated by lncRNAs in human cancers.
 Depends: R (>= 3.1.0), fgsea
 Imports:
    data.table (>= 1.12.8),
