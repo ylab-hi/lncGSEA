@@ -20,7 +20,7 @@ library(RColorBrewer)
 ## Install `lncGSEA` 
 ```
 library(devtools)
-install_github("ynren1020/lncGSEA")
+install_github("ylab-hi/lncGSEA")
 library(lncGSEA)
 ```
 ## Download required datasets 
