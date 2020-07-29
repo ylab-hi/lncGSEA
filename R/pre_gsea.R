@@ -1,12 +1,15 @@
-#' process expression data for sg_GSEA function
+#' Process expression data for lnc_GSEA function
 #'
-#' Find TCGA samples appear both in RNAseq expression (FPKM) data frame and lncRNAs
-#' data frame, if the sample ids are different, use tcga.meta.info to match.
+#' Match lncRNA and genes expression (FPKM) for TCGA tumor samples. The first column of
+#' the output stores patient ids of a specific tumor cohort from TCGA, the column name is the cohort's name.
+#' The second column is the expression of a transcript of the lncRNA you input, the other columns
+#' are other genes expression.
+#'
 #'
 #' @param cohort A character string which is the short name for cohorts in TCGA
-#' @param t_id A character string of transcript id, either start with ENST or T
+#' @param t_id A character string of transcript id, e.g., "T136792", "ENST00000561519"
 #'
-#' @return A data frame of lncRNA's transcript and other genes' expression in interested cohort
+#' @return A data frame of lncRNA's transcript and other genes' expression in an interested cohort
 #'
 #' @import data.table
 #' @import stringr
@@ -27,10 +30,10 @@ pre_gsea <- function(cohort, t_id){
 
     # interested cohort ---
     cohort <- toupper(cohort)
-    #cohort.file <- paste0("./data/", cohort, ".FPKM.txt")
+    cohort.file <- paste0("./data/", cohort, ".FPKM.txt")
 
     # for test -----
-    cohort.file <- system.file("extdata", paste0(cohort,".FPKM.txt.gz"), package= "lncGSEA")
+    #cohort.file <- system.file("extdata", paste0(cohort,".FPKM.txt.gz"), package= "lncGSEA")
 
     if (file.exists(cohort.file)) {
     cancer <- as.data.frame(data.table::fread(cohort.file))
@@ -50,25 +53,26 @@ pre_gsea <- function(cohort, t_id){
     mich <- data.table::fread(system.file("extdata", "mitranscriptome.expr.fpkm_tid.tsv.gz",package = "lncGSEA"))
 
     if (any(grepl(t_id, reflnc[[1]]))) {
-        #dataFiles <- "./data/RefLnc_lncRNA_tumor_sample_FPKM.gz"
-        # for test ----
-        dataFiles <- system.file("extdata", "RefLnc_lncRNA_tumor_sample_FPKM.gz", package = "lncGSEA")
+        dataFiles <- "./data/RefLnc_lncRNA_tumor_sample_FPKM.gz"
         meta <- data.table::fread(system.file("extdata", "tcga.meta.file.txt.gz", package = "lncGSEA"))
 
+        # for test ----
+        #dataFiles <- system.file("extdata", "RefLnc_lncRNA_tumor_sample_FPKM.gz", package = "lncGSEA")
+
     } else if (any(grepl(t_id, mich[[1]]))) {
-        # for test ---
-         dataFiles <- system.file("extdata", "mitranscriptome.expr.fpkm.tsv.gz", package = "lncGSEA")
-        # dataFiles <- "./data/mitranscriptome.expr.fpkm.tsv.gz"
+        dataFiles <- "./data/mitranscriptome.expr.fpkm.tsv.gz"
         meta <- data.table::fread(system.file("extdata", "library_info.txt.gz", package = "lncGSEA"))
 
-    } else { message("Can not find the input t_id in the package database.
+        # for test ---
+        # dataFiles <- system.file("extdata", "mitranscriptome.expr.fpkm.tsv.gz", package = "lncGSEA")
+
+    } else { message("Can not find the input t_id in the provided databases.
                      Users should provide their lncRNAs expression matrix for
                      TCGA samples.")}
 
     # create data.table with header ---
     dt <- data.table::fread(dataFiles)
     names(dt)[1] <- "transcript_id"
-    #dt <- dt[dt$transcript_id==t_id, ] # change enst00098899.1 to enst00098899
     dt <- dt[grep(t_id, dt$transcript_id), ]
     if (nrow(dt) > 1){
         dt <- unique(dt)
