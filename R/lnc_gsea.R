@@ -1,9 +1,10 @@
-#' Single lncRNA Gene Set Enrichment Analysis
+#' lncRNA associated Gene Set Enrichment Analysis
 #'
 #' TCGA samples are either stratified by lncRNA's expression and then calculate
-#' logFC of high vs low express groups, or calculate correlation of genes' expression
-#' with lncRNA's expression, genes are ordered by logFC or correlation coefficent
-#' from largest to smallest. The pre-ranked file is used for pre-ranked GSEA using fgsea
+#' log2FC of high vs low expressed groups for each genes, or calculate correlation coefficient
+#' between each gene's expression and the lncRNA's expression. Genes are then ordered by logFC
+#' or correlation coefficent in a descending order. The ranked gene list will be used by `fgsea`
+#' for pre-ranked GSEA.
 #'
 #' @param tid_cohort A output of data frame from pre_gsea function
 #' @param metric A string of character, showing which metric is used for rank
@@ -18,8 +19,10 @@
 #' @import data.table
 #' @import dplyr
 #'
-#' @return A dataframe showing the GSEA results,if pathway is provided, its enrichment plot
-#'         will be produced too.
+#' @return A file with the GSEA results.If pathway is provided, its enrichment plot
+#'         will be produced too. If genelist is TRUE, also get a file for a ranked gene list
+#'          with ranking metrics, which can be used for GSEA desktop app provided by Broad Institute.
+#'
 #'
 #' @example
 #' lnc_gsea(tid_cohort = test,
@@ -85,9 +88,9 @@ lnc_gsea <- function(tid_cohort, metric=c("cor", "logFC"), cor.method = c("pears
 
     fgseaRes <- fgsea::fgsea(pathways=pathways.hallmark, stats=ranks, nperm=1000)
     print(fgseaRes)
+
     # tidy the results -----
-    #fgseaResTidy <- fgseaRes[base::order(-NES,padj),]
-     fgseaResTidy <- dplyr::arrange(fgseaRes,desc(NES),padj)
+    fgseaResTidy <- dplyr::arrange(fgseaRes,desc(NES),padj)
 
     data.table::fwrite(fgseaResTidy, paste0(t_id, "_", cohort, "_", metric, ".txt"),
                        col.names = TRUE, row.names = FALSE, sep = "\t", quote = FALSE)
