@@ -60,9 +60,6 @@ plot_gsea <- function(gsea.df,pathway.list=NULL,direction=c("both","pos","neg"),
 
     ptest<-ggplot(dat,aes(x=logP.sign,y=NES,label = ifelse(name == "Yes",as.character(pathway),"")))+
         geom_point(aes(color = logP))+
-        #geom_text(aes(label = ifelse(color=="dark",as.character(NAME),'')), vjust= -1)+
-        #ggplot2::geom_point(aes(color=ifelse(FDR.q.val < 0.001, "FDR < = 0.001", ifelse(FDR.q.val < 0.01, "FDR < 0.01", ifelse(FDR.q.val ))))+ #mapping aes(color),here define different color based on isSuper!!!
-        #ggplot2::scale_colour_manual(name='',values=c('FDR > 0.05'='grey','FDR < = 0.05'='red'))+ #add color manually!!!!
         scale_color_gradient(low = "blue", high = "red") +
         geom_vline(xintercept = 1.30103,linetype="dashed",size=0.5,alpha=0.2)+
         geom_vline(xintercept = -1.30103,linetype="dashed",size=0.5,alpha=0.2)+
