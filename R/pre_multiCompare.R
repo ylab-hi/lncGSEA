@@ -1,4 +1,4 @@
-#' Enriched pathways results of multiple lncRNAs per cohort or multiple cohort per lncRNA
+#' Enriched pathways results of multiple lncRNAs per cohort or multiple cohorts per lncRNA
 #'
 #' Combine the enriched pathways' results of multiple lncRNAs in one cohort
 #' or one lncRNAs in multiple cohort
