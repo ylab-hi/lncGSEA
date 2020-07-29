@@ -122,8 +122,7 @@ plot_gsea("ENST00000561519.5_PRAD_cor.txt", direction = "both")
 ### Compare one lncRNA's regulated pathways in different studies 
 
 If you have not run lnc_gsea for your interested lncRNA in multiple studies, you can obtain those results by running `pre_compareCohort` function, the output of this function
-can be directly used by function `plot_compareCohort`, which will produce a plot shown below. If you already have enriched pathways results for the interested lncRNA in multiple studies, you can apply function `pre_multiCohort`, and then feed the output to 
-`plot_compareCohort` to obtain plot like below.
+can be directly used by function `plot_compareCohort`, which will produce a plot shown below. If you already have enriched pathways results for the interested lncRNA in multiple studies, you can apply function `pre_multiCompare` and set `compare = "cohort"`, and then feed the output to `plot_compareCohort` to obtain plot like below.
 
 Suppose one wants to compare the difference of enriched pathways for transcript "ENST00000561519" of ARLNC1 in prostate, lung and breast cancer.
 
@@ -157,7 +156,7 @@ plot_multiCompare(prad)
 ![multiple_lncRNA_prad](https://user-images.githubusercontent.com/25854857/88564437-d58f5180-cff8-11ea-860d-21a387124036.png)
 
 ## lncRNA expression matrix provided by user
-If you have your an interested lncRNA which has not been included in those two databases yet, you can provide your own customized lncRNA expression matrix in TCGA cohorts. 
+If you have an interested lncRNA which has not been included in those two databases yet, you can provide your own customized lncRNA expression matrix in TCGA cohorts. 
 
 An example of the customized lncRNA expression data frame or matrix should look like:
 
