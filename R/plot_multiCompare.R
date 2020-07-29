@@ -70,8 +70,6 @@ plot_multiCompare <- function(gseares) {
         scale_fill_gradient2(high = "coral3", low = "deepskyblue3", mid = "white") +
         scale_color_manual(values = c("coral3","deepskyblue3","white")) +
         scale_size_manual(values=c(0,3,4)) +
-        #ggtitle("MSigDB Hallmarks GSEA Results (P.adj < 0.05)") +
-        ggtitle("Comparison GSEA Results in multiple studies") +
         theme_bw() +
         guides(size = guide_legend(override.aes = list(shape=17))) +
         theme(plot.title = element_text(hjust = 0.5),
@@ -81,5 +79,5 @@ plot_multiCompare <- function(gseares) {
               axis.text.y = element_text(face = "plain",size=8, color='black'))
 
     p
-    #ggsave("gsea.png")
+
 }
