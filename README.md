@@ -12,7 +12,7 @@ Install required packages
 install.packages("devtools")
 install.packages("data.table")
 install.packages(c("dplyr", "stringr","tidyr","tibble","ggplot2"))
-install.packages("ggrepel", "RColorBrewer")
+install.packages(c("ggrepel", "RColorBrewer"))
 devtools::install_github("ctlab/fgsea")
 ```
 Load required packages
