@@ -35,10 +35,10 @@ Description: An R Package to infer lncRNA associated pathways from Large-scale
 Depends: R (>= 3.3.0), fgsea
 Imports:
    data.table,
-   dplyr (>= 1.0.0),
-   stringr (>= 1.4.0),
-   tidyr (>= 1.1.0),
-   tibble (>= 2.1.3),
+   dplyr,
+   stringr,
+   tidyr,
+   tibble,
    fgsea (>= 1.10.1),
    ggplot2 (>= 2.2.0),
    RColorBrewer,
