@@ -6,7 +6,18 @@
 An R package for linking gene signatures with lncRNA's expression and make prediction of enriched pathways regulated by lncRNAs in human cancer samples
 
 ## Prerequisites
+
+Install required packages
 ```
+install.packages("devtools")
+install.packages("data.table")
+install.packages(c("dplyr", "stringr","tidyr","tibble","ggplot2"))
+install.packages("ggrepel", "RColorBrewer")
+devtools::install_github("ctlab/fgsea")
+```
+Load required packages
+```
+library(devtools)
 library(fgsea)
 library(data.table)
 library(tibble)
@@ -19,7 +30,6 @@ library(RColorBrewer)
 ```
 ## Install `lncGSEA` 
 ```
-library(devtools)
 install_github("ylab-hi/lncGSEA")
 library(lncGSEA)
 ```
