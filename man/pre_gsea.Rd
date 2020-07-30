@@ -4,7 +4,7 @@
 \alias{pre_gsea}
 \title{Process expression data for lnc_GSEA function}
 \usage{
-pre_gsea(cohort, t_id, pathtofile)
+pre_gsea(cohort, t_id, pathtofile, fortest = FALSE)
 }
 \arguments{
 \item{cohort}{A character string which is the short name for cohorts in TCGA}
@@ -12,6 +12,8 @@ pre_gsea(cohort, t_id, pathtofile)
 \item{t_id}{A character string of transcript id, e.g., "T136792", "ENST00000561519"}
 
 \item{pathtofile}{A character string, the path to the datasets downloaded}
+
+\item{fortest}{TRUE or FALSE, default is FALSE. Only for test example}
 }
 \value{
 A data frame of lncRNA's transcript and other genes' expression in an interested cohort
