@@ -56,7 +56,7 @@ if (!file.exists("data")){
 Create an expression data frame for PRAD cohort, columns are one of transcripts of ARLNC1 (e.g. ENST00000561519) and other genes. Rows are tumor samples from PRAD cohort. The first column name of output should be the cohort name one use in `pre_gsea` and the second column name should be the transcript id. A same transcript id may have different versions, `pre_gsea` use transcript id without version number ("ENST00000561519" instead of "ENST00000561519.[0-9]"). 
 
 ```
-test <- pre_gsea("PRAD", "ENST00000561519")
+test <- pre_gsea("PRAD", "ENST00000561519", "./data/")
 test[1:4, 1:4]
 ```
 
@@ -139,7 +139,7 @@ Suppose one wants to compare the difference of enriched pathways for transcript 
 ```
 # run from the scratch 
 cohorts <- c("PRAD","LUAD","BRCA")
-arlnc1.df <- pre_compareCohort(lncRNA="ENST00000561519", cohorts = cohorts)
+arlnc1.df <- pre_compareCohort(lncRNA="ENST00000561519", cohorts = cohorts, pathtofile="./data/")
 # already have lnc_gsea output 
 arlnc1.df <- pre_multiCompare(files = list("ENST00000561519_PRAD_cor.txt",
                                           "ENST00000561519_LUAD_cor.txt",
