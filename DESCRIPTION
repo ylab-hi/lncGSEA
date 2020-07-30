@@ -32,7 +32,7 @@ Description: An R Package to infer lncRNA associated pathways from Large-scale
              gene signatures with a lncRNA expression in tumor patient samples 
              from the TCGA study. It is capable of identifying enriched pathways
              regulated by lncRNAs in human cancers.
-Depends: R (>= 3.3.0), fgsea
+Depends: R (>= 3.3.0)
 Imports:
    data.table,
    dplyr,
