@@ -2,21 +2,25 @@
 % Please edit documentation in R/pre_gsea.R
 \name{pre_gsea}
 \alias{pre_gsea}
-\title{process expression data for sg_GSEA function}
+\title{Process expression data for lnc_GSEA function}
 \usage{
-pre_gsea(cohort, t_id)
+pre_gsea(cohort, t_id, pathtofile)
 }
 \arguments{
 \item{cohort}{A character string which is the short name for cohorts in TCGA}
 
-\item{t_id}{A character string of transcript id, either start with ENST or T}
+\item{t_id}{A character string of transcript id, e.g., "T136792", "ENST00000561519"}
+
+\item{pathtofile}{A character string, the path to the datasets downloaded}
 }
 \value{
-A data frame of lncRNA's transcript and other genes' expression in interested cohort
+A data frame of lncRNA's transcript and other genes' expression in an interested cohort
 }
 \description{
-Find TCGA samples appear both in RNAseq expression (FPKM) data frame and lncRNAs
-data frame, if the sample ids are different, use tcga.meta.info to match.
+Match lncRNA and genes expression (FPKM) for TCGA tumor samples. The first column of
+the output stores patient ids of a specific tumor cohort from TCGA, the column name is the cohort's name.
+The second column is the expression of a transcript of the lncRNA you input, the other columns
+are other genes expression.
 }
 \details{
 cohort should be one of studies in TCGA, for example, "PRAD" can be used as

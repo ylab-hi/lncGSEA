@@ -4,12 +4,14 @@
 \alias{pre_compareCohort}
 \title{Create data frame for plot_compareCohort}
 \usage{
-pre_compareCohort(lncRNA, cohorts, geneset = NULL)
+pre_compareCohort(lncRNA, cohorts, pathtofile, geneset = NULL)
 }
 \arguments{
 \item{lncRNA}{A character string which is the name of a transcript id, e.g.,"ENST00000561519"}
 
 \item{cohorts}{A upper case string showing one of TCGA cohorts, e.g, "PRAD"}
+
+\item{pathtofile}{A character string, the path to the datasets downloaded}
 
 \item{geneset}{A character string which gives the path to a gene set gmt file}
 }

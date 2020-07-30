@@ -10,8 +10,7 @@ plot_gsea(
   gsea.df,
   pathway.list = NULL,
   direction = c("both", "pos", "neg"),
-  n = 3,
-  ...
+  n = 3
 )
 }
 \arguments{
@@ -22,8 +21,6 @@ plot_gsea(
 \item{direction}{A string, "pos" or "neg" or "both" to label positive or negative or both enriched pathways}
 
 \item{n}{A number, defining how many pos or neg or both pathways to label}
-
-\item{...}{other parameters to adjust plot}
 }
 \value{
 A pdf plot with NES as y axis and sign(NES)*(-log10(FDR)) as x axis

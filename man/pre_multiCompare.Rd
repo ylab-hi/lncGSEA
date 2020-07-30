@@ -2,7 +2,7 @@
 % Please edit documentation in R/pre_multiCompare.R
 \name{pre_multiCompare}
 \alias{pre_multiCompare}
-\title{Enriched pathways results of multiple lncRNAs per cohort or multiple cohort per lncRNA}
+\title{Enriched pathways results of multiple lncRNAs per cohort or multiple cohorts per lncRNA}
 \usage{
 pre_multiCompare(files, compare = c("lncRNA", "cohort"))
 }

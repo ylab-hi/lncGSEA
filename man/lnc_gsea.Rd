@@ -2,12 +2,12 @@
 % Please edit documentation in R/lnc_gsea.R
 \name{lnc_gsea}
 \alias{lnc_gsea}
-\title{Single lncRNA Gene Set Enrichment Analysis}
+\title{lncRNA associated Gene Set Enrichment Analysis}
 \usage{
 lnc_gsea(
   tid_cohort,
   metric = c("cor", "logFC"),
-  cor.method = "pearson",
+  cor.method = c("pearson", "spearman"),
   genelist = FALSE,
   geneset = NULL,
   pathway = NULL
@@ -27,12 +27,14 @@ lnc_gsea(
 \item{pathway}{A string of character, showing one of pathway in the gmt file}
 }
 \value{
-A dataframe showing the GSEA results,if pathway is provided, its enrichment plot
-        will be produced too.
+A file with the GSEA results.If pathway is provided, its enrichment plot
+        will be produced too. If genelist is TRUE, also get a file for a ranked gene list
+         with ranking metrics, which can be used for GSEA desktop app provided by Broad Institute.
 }
 \description{
 TCGA samples are either stratified by lncRNA's expression and then calculate
-logFC of high vs low express groups, or calculate correlation of genes' expression
-with lncRNA's expression, genes are ordered by logFC or correlation coefficent
-from largest to smallest. The pre-ranked file is used for pre-ranked GSEA using fgsea
+log2FC of high vs low expressed groups for each genes, or calculate correlation coefficient
+between each gene's expression and the lncRNA's expression. Genes are then ordered by logFC
+or correlation coefficent in a descending order. The ranked gene list will be used by `fgsea`
+for pre-ranked GSEA.
 }
