@@ -9,6 +9,7 @@
 #' @param cohort A character string which is the short name for cohorts in TCGA
 #' @param t_id A character string of transcript id, e.g., "T136792", "ENST00000561519"
 #' @param pathtofile A character string, the path to the datasets downloaded
+#' @param fortest TRUE or FALSE, default is FALSE. Only for test example
 #'
 #' @return A data frame of lncRNA's transcript and other genes' expression in an interested cohort
 #'
@@ -25,14 +26,16 @@
 #' pre_gsea("BRCA","ENST00000430998", "~/data/")
 #'
 #' @export
-pre_gsea <- function(cohort, t_id, pathtofile){
+pre_gsea <- function(cohort, t_id, pathtofile, fortest=FALSE){
 
     # interested cohort ---
     cohort <- toupper(cohort)
+    if (!fortest) {
     cohort.file <- paste0(pathtofile, cohort, ".FPKM.txt")
+    } else {
+    cohort.file <- system.file("extdata", paste0(cohort,".FPKM.txt.gz"), package= "lncGSEA")
+    }
 
-    # for test -----
-    #cohort.file <- system.file("extdata", paste0(cohort,".FPKM.txt.gz"), package= "lncGSEA")
 
     if (file.exists(cohort.file)) {
     cancer <- as.data.frame(data.table::fread(cohort.file))
@@ -52,18 +55,22 @@ pre_gsea <- function(cohort, t_id, pathtofile){
     mich <- data.table::fread(system.file("extdata", "mitranscriptome.expr.fpkm_tid.tsv.gz",package = "lncGSEA"))
 
     if (any(grepl(t_id, reflnc[[1]]))) {
-        dataFiles <- paste0(pathtofile, "RefLnc_lncRNA_tumor_sample_FPKM.gz")
+        if (!fortest) {
+           dataFiles <- paste0(pathtofile, "RefLnc_lncRNA_tumor_sample_FPKM.gz")
+        } else {
+           dataFiles <- system.file("extdata", "RefLnc_lncRNA_tumor_sample_FPKM.gz", package = "lncGSEA")
+        }
         meta <- data.table::fread(system.file("extdata", "tcga.meta.file.txt.gz", package = "lncGSEA"))
 
-        # for test ----
-        #dataFiles <- system.file("extdata", "RefLnc_lncRNA_tumor_sample_FPKM.gz", package = "lncGSEA")
-
     } else if (any(grepl(t_id, mich[[1]]))) {
-        dataFiles <- paste0(pathtofile, "mitranscriptome.expr.fpkm.tsv.gz")
+        if (!fortest) {
+            dataFiles <- paste0(pathtofile, "mitranscriptome.expr.fpkm.tsv.gz")
+        } else {
+            # for test ---
+            dataFiles <- system.file("extdata", "mitranscriptome.expr.fpkm.tsv.gz", package = "lncGSEA")
+            }
         meta <- data.table::fread(system.file("extdata", "library_info.txt.gz", package = "lncGSEA"))
 
-        # for test ---
-        # dataFiles <- system.file("extdata", "mitranscriptome.expr.fpkm.tsv.gz", package = "lncGSEA")
 
     } else { message("Can not find the input t_id in the provided databases.
                      Users should provide their lncRNAs expression matrix for
