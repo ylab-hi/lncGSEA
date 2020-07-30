@@ -68,7 +68,7 @@ transdf <- function(df){
 #'@export
 
 custom_lnc <- function(lncRNA, cohort.file){
-    lnc <- read.delim(lncRNA, sep = "\t", stringsAsFactors = FALSE,
+    novel <- read.delim(lncRNA, sep = "\t", stringsAsFactors = FALSE,
                       header = TRUE, check.names = FALSE)
     cohort <- as.data.frame(data.table::fread(cohort.file))
 
