@@ -1,5 +1,6 @@
 #' \code{lncGSEA} package
 #'
+#' lncRNA associated GSEA
 #'
 #' @docType package
 #' @name lncGSEA
