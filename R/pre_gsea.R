@@ -59,7 +59,7 @@ pre_gsea <- function(cohort, t_id, pathtofile){
         #dataFiles <- system.file("extdata", "RefLnc_lncRNA_tumor_sample_FPKM.gz", package = "lncGSEA")
 
     } else if (any(grepl(t_id, mich[[1]]))) {
-        dataFiles <- pasteo(pathtofile, "mitranscriptome.expr.fpkm.tsv.gz")
+        dataFiles <- paste0(pathtofile, "mitranscriptome.expr.fpkm.tsv.gz")
         meta <- data.table::fread(system.file("extdata", "library_info.txt.gz", package = "lncGSEA"))
 
         # for test ---
