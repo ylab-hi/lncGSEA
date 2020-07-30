@@ -4,3 +4,6 @@
 \name{lncGSEA}
 \alias{lncGSEA}
 \title{\code{lncGSEA} package}
+\description{
+lncRNA associated GSEA
+}
