@@ -36,7 +36,7 @@ pre_gsea <- function(cohort, t_id, pathtofile){
 
     if (file.exists(cohort.file)) {
     cancer <- as.data.frame(data.table::fread(cohort.file))
-    } else {stop(cohort.file, " does not exist!")}
+    } else {message(cohort.file, " does not exist!")}
 
     # filter out low expressed genes -----
     cancer <- cancer[rowMeans(cancer[,-1])>=1, ]
