@@ -3,10 +3,10 @@ context("test multiple lncRNAs/cohort results")
 library(lncGSEA)
 
 test_that("First column name is pathway and ncol is 6", {
-    df.test1 <- pre_gsea("PRAD", "T136792", "/Users/yren/Projects/lncGSEA/inst/extdata/")
+    df.test1 <- pre_gsea("PRAD", "T136792", "/Users/yren/Projects/lncGSEA/inst/extdata/", fortest = TRUE)
     lnc.test1 <- lnc_gsea(df.test1, metric = "cor", cor.method = "pearson")
 
-    df.test2 <- pre_gsea("PRAD", "T136804", "/Users/yren/Projects/lncGSEA/inst/extdata/")
+    df.test2 <- pre_gsea("PRAD", "T136804", "/Users/yren/Projects/lncGSEA/inst/extdata/", fortest = TRUE)
     lnc.test2 <- lnc_gsea(df.test2, metric = "cor", cor.method = "pearson")
 
     prad <- pre_multiCompare(files = list("T136792_PRAD_cor.txt",
@@ -20,10 +20,10 @@ test_that("First column name is pathway and ncol is 6", {
 
 
 test_that("plot_multiCompare works", {
-    df.test1 <- pre_gsea("PRAD", "T136792", "/Users/yren/Projects/lncGSEA/inst/extdata/")
+    df.test1 <- pre_gsea("PRAD", "T136792", "/Users/yren/Projects/lncGSEA/inst/extdata/", fortest = TRUE)
     lnc.test1 <- lnc_gsea(df.test1, metric = "cor",cor.method = "pearson")
 
-    df.test2 <- pre_gsea("PRAD", "T136804", "/Users/yren/Projects/lncGSEA/inst/extdata/")
+    df.test2 <- pre_gsea("PRAD", "T136804", "/Users/yren/Projects/lncGSEA/inst/extdata/", fortest = TRUE)
     lnc.test2 <- lnc_gsea(df.test2, metric = "cor",cor.method = "pearson")
 
     prad <- pre_multiCompare(files = list("T136792_PRAD_cor.txt",
