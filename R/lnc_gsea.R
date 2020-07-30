@@ -90,7 +90,7 @@ lnc_gsea <- function(tid_cohort, metric=c("cor", "logFC"), cor.method = c("pears
     print(fgseaRes)
 
     # tidy the results -----
-    fgseaResTidy <- dplyr::arrange(fgseaRes,desc(NES),padj)
+    fgseaResTidy <- dplyr::arrange(fgseaRes,desc(fgseaRes$NES),fgseaRes$padj)
 
     data.table::fwrite(fgseaResTidy, paste0(t_id, "_", cohort, "_", metric, ".txt"),
                        col.names = TRUE, row.names = FALSE, sep = "\t", quote = FALSE)
