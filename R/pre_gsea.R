@@ -8,6 +8,7 @@
 #'
 #' @param cohort A character string which is the short name for cohorts in TCGA
 #' @param t_id A character string of transcript id, e.g., "T136792", "ENST00000561519"
+#' @param pathtofile A character string, the path to the datasets downloaded
 #'
 #' @return A data frame of lncRNA's transcript and other genes' expression in an interested cohort
 #'
@@ -20,17 +21,15 @@
 #'          database or reflnc database.
 #'
 #' @example
-#' pre_gsea("PRAD", "T280760")
-#' pre_gsea("BRCA","ENST00000430998")
+#' pre_gsea("PRAD", "T280760", "~/data/")
+#' pre_gsea("BRCA","ENST00000430998", "~/data/")
 #'
 #' @export
-pre_gsea <- function(cohort, t_id){
-
-    #dataDir <- path.expand("./data")
+pre_gsea <- function(cohort, t_id, pathtofile){
 
     # interested cohort ---
     cohort <- toupper(cohort)
-    cohort.file <- paste0("./data/", cohort, ".FPKM.txt")
+    cohort.file <- paste0(pathtofile, cohort, ".FPKM.txt")
 
     # for test -----
     #cohort.file <- system.file("extdata", paste0(cohort,".FPKM.txt.gz"), package= "lncGSEA")
@@ -53,14 +52,14 @@ pre_gsea <- function(cohort, t_id){
     mich <- data.table::fread(system.file("extdata", "mitranscriptome.expr.fpkm_tid.tsv.gz",package = "lncGSEA"))
 
     if (any(grepl(t_id, reflnc[[1]]))) {
-        dataFiles <- "./data/RefLnc_lncRNA_tumor_sample_FPKM.gz"
+        dataFiles <- paste0(pathtofile, "RefLnc_lncRNA_tumor_sample_FPKM.gz")
         meta <- data.table::fread(system.file("extdata", "tcga.meta.file.txt.gz", package = "lncGSEA"))
 
         # for test ----
         #dataFiles <- system.file("extdata", "RefLnc_lncRNA_tumor_sample_FPKM.gz", package = "lncGSEA")
 
     } else if (any(grepl(t_id, mich[[1]]))) {
-        dataFiles <- "./data/mitranscriptome.expr.fpkm.tsv.gz"
+        dataFiles <- pasteo(pathtofile, "mitranscriptome.expr.fpkm.tsv.gz")
         meta <- data.table::fread(system.file("extdata", "library_info.txt.gz", package = "lncGSEA"))
 
         # for test ---
