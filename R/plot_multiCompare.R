@@ -4,18 +4,20 @@
 #'
 #' @param lncRNA A character string which is the name of a transcript id, e.g.,"ENST00000561519"
 #' @param cohorts A upper case string showing one of TCGA cohorts, e.g, "PRAD"
+#' @param pathtofile A character string, the path to the datasets downloaded
 #' @param geneset A character string which gives the path to a gene set gmt file
+#'
 #' @import data.table
 #' @import ggplot2
 #' @return A data frame contains GSEA results of one lncRNA in multiple studies
 #' @example
 #' cohorts <- c("PRAD","LUAD","BRCA")
-#' arlnc1.df <- pre_compareCohort(lncRNA="ENST00000561519", cohorts = cohorts)
+#' arlnc1.df <- pre_compareCohort(lncRNA="ENST00000561519", cohorts = cohorts, pathtofile = "/Users/yren/Projects/lncGSEA/data/")
 #' @export
 
-pre_compareCohort <- function(lncRNA, cohorts, geneset = NULL){
+pre_compareCohort <- function(lncRNA, cohorts, pathtofile, geneset = NULL){
     # apply pre_gsea to multiple cohorts ---
-    files <- sapply(cohorts, pre_gsea, lncRNA)
+    files <- mapply(pre_gsea, cohorts, lncRNA, pathtofile)
     print(length(files))
 
     res <- vector(mode = "list", length = length(files))
