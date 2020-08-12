@@ -1,4 +1,5 @@
-# lncGSEA
+# lncGSEA: an R package to infer lncRNA associated pathways from large-scale cancer
+transcriptome sequencing data
 [![Build Status](https://travis-ci.com/ylab-hi/lncGSEA.svg?branch=master)](https://travis-ci.com/ylab-hi/lncGSEA)
 [![Build status](https://ci.appveyor.com/api/projects/status/s7kxsv678ltwps39?svg=true)](https://ci.appveyor.com/project/ynren1020/lncgsea)
 
