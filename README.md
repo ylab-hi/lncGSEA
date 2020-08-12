@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/ylab-hi/lncGSEA.svg?branch=master)](https://travis-ci.com/ylab-hi/lncGSEA)
 [![Build status](https://ci.appveyor.com/api/projects/status/s7kxsv678ltwps39?svg=true)](https://ci.appveyor.com/project/ynren1020/lncgsea)
 
-An R package for linking gene signatures with lncRNA's expression and make prediction of enriched pathways regulated by lncRNAs in human cancer samples
+lncGSEA is a convenient tool to predict the lncRNA associated pathways through Gene Set Enrichment Analysis (GSEA) of gene expression profiles from large-scale cancer patient samples. 
 
 ## Prerequisites
 
@@ -84,31 +84,31 @@ lnc_gsea(tid_cohort = test, metric = "cor", cor.method = "pearson", genelist = T
 
 The first few rows output of `lnc_gsea` is shown as below:
 
-    pathway pval    padj    ES      NES     nMoreExtreme    size    leadingEdge
-    HALLMARK_ANDROGEN_RESPONSE      0.00495049504950495     0.0114207400639561           0.557499635112727       2.64517249185999        0       94      ABCC4|RPS6KA3|SMS|PDLIM5|ELL2|ALDH1A3|CAMKK2|KLK3|TPD52|HERC3
-    HALLMARK_FATTY_ACID_METABOLISM  0.00531914893617021     0.0115633672525439      0.414582544119726       2.08586189726878        0       135     ACADL|SMS|BPHL|AADAT|MCEE|ACADM|HSD17B4|DECR1|SLC22A5
-    HALLMARK_OXIDATIVE_PHOSPHORYLATION      0.0072992700729927      0.0139236981342245      0.3653391048645 1.89836259490338        0       182     GLUD1|ACADM|ACADSB|ALDH6A1|MPC1|GOT2|DECR1|PDHX|PRDX3
-    HALLMARK_UNFOLDED_PROTEIN_RESPONSE      0.0050251256281407      0.0114207400639561      0.394156289494017       1.89735321170183        0       106     SLC1A4|TUBB2A|WIPI1|PREB|PDIA5|SSR1|DNAJB9|PSAT1|TARS
+    pathway                                 pval          padj          ES            NES       nMoreExtreme  size    leadingEdge
+    HALLMARK_ANDROGEN_RESPONSE              0.004950      0.011421      0.557500      2.645172        0       94      ABCC4|RPS6KA3|SMS|PDLIM5|ELL2|ALDH1A3
+    HALLMARK_FATTY_ACID_METABOLISM          0.005319      0.011563      0.414583      2.0858619       0       135     ACADL|SMS|BPHL|AADAT|MCEE|ACADM
+    HALLMARK_OXIDATIVE_PHOSPHORYLATION      0.007299      0.013924      0.365339      1.898366        0       182     GLUD1|ACADM|ACADSB|ALDH6A1|MPC1|GOT2
+    HALLMARK_UNFOLDED_PROTEIN_RESPONSE      0.005025      0.011421      0.394156      1.897353        0       106     SLC1A4|TUBB2A|WIPI1|PREB|PDIA5|SSR1
     ....
     
 The first few rows ranked gene list data frame looks like below:
 
     gene_name       ranks
     RP11.314O13.1   0.672201572333335
-    SLC4A4  0.463208163284544
+    SLC4A4          0.463208163284544
     RP11.114M1.1    0.457428137420679
-    NUDT4   0.428204695416086
+    NUDT4           0.428204695416086
     LINC00578       0.417863932304566
-    MPC2    0.405784680718824
-    TRPM8   0.403574189464877
-    ABCC4   0.401451566178376
+    MPC2            0.405784680718824
+    TRPM8           0.403574189464877
+    ABCC4           0.401451566178376
     AL589822.1      0.392845646974538
-    TRIM36  0.38249804158695
-    CLGN    0.380270202148028
+    TRIM36          0.38249804158695
+    CLGN            0.380270202148028
     POTEH.AS1       0.379078513980204
-    MEAF6   0.368165483665729
-    GLYATL1 0.363674770886263
-    CITED2  0.36312799821486
+    MEAF6           0.368165483665729
+    GLYATL1         0.363674770886263
+    CITED2          0.36312799821486
     ....
  
 ## Visualization 
