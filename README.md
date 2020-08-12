@@ -73,7 +73,7 @@ The first 4 rows and columns are shown below:
      1765 TCGA-QU-A6IM-01A-11R-A31N-07            0.0000   8.45  9.04 0.789
      
      
-## Run `lnc_gsea` function on output `test`. 
+### Run `lnc_gsea` function on output `test`
 The default ranking metric is "pearson" correlation coefficient, you can also set cor.method = "spearman" to apply "spearman" correlation coefficient as ranking metric. The other ranking metric is "logFC", which is log2FoldChange between high expressed lncRNA group vs low expressed group. The default geneset is NULL, in this case, `lnc_gsea` will use HALLMARK gene set from MSigDB. You can provide your own customized gene set too, for example, your gene set is stored in a folder called "gmt" at current working directory, geneset can be set as "./gmt/yourgeneset.gmt".
 The pathway enrichement analysis is implemented by `fgsea` function from R package "fgsea". You can also set genelist = TRUE, to save a ranked gene list data frame for pre-ranked GSEA analysis using GSEA desktop app from Broad Institute. This ranked gene list data frame has two columns, the first column is gene name, the second column is ranking metric, either logFC or correlation coefficient in decreasing order. The main output of this function is the enriched pathways ranked by NES (normalized enrichement score) in a descending order. If you want to visualize an interested pathway, set pathway = "you pathway", an enrichement plot can be saved in your current working directory. 
 
@@ -111,7 +111,7 @@ The first few rows ranked gene list data frame looks like below:
     CITED2          0.36312799821486
     ....
  
-## Visualization 
+### Visualization 
 
 By setting `pathway = "HALLMARK_ANDROGEN_RESPONSE"` in `lnc_gsea`, you can have an enrichement plot of AR pathway, which is displayed as below. The plot is produced by `plotEnrichment` function of `fgsea` package.
 
@@ -130,7 +130,7 @@ plot_gsea("ENST00000561519.5_PRAD_cor.txt", direction = "both")
 ![ARLNC1_plot_example](https://user-images.githubusercontent.com/25854857/88563135-387fe900-cff7-11ea-98c4-43f7498e7900.png)
 
 
-### Compare one lncRNA's regulated pathways in different studies 
+#### Compare one lncRNA's regulated pathways in different studies 
 
 If you have not run lnc_gsea for your interested lncRNA in multiple studies, you can obtain those results by running `pre_compareCohort` function, the output of this function
 can be directly used by function `plot_compareCohort`, which will produce a plot shown below. If you already have enriched pathways results for the interested lncRNA in multiple studies, you can apply function `pre_multiCompare` and set `compare = "cohort"`, and then feed the output to `plot_compareCohort` to obtain plot like below.
@@ -152,7 +152,7 @@ plot_multiCompare(arlnc1.df)
 
 ![ARLNC1_3cohorts_ht](https://user-images.githubusercontent.com/25854857/88564266-9fea6880-cff8-11ea-9037-a20454480122.png)
 
-### Study multiple lncRNAs' regulatory pathway in one cancer 
+#### Study multiple lncRNAs' regulatory pathway in one cancer 
 
 Similarly, you can collectively compare multiple lncRNAs regulatory enriched pathway in one cancer. Here suppose you already have results from `lnc_gsea` for the list of interested lncRNAs. You can obtain a similar plot by running the following functions:
 
