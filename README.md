@@ -166,7 +166,7 @@ plot_multiCompare(prad)
 
 ![multiple_lncRNA_prad](https://user-images.githubusercontent.com/25854857/88564437-d58f5180-cff8-11ea-860d-21a387124036.png)
 
-## lncRNA expression matrix provided by user
+## An example of lncRNA expression matrix provided by user
 If you have an interested lncRNA which has not been included in those two databases yet, you can provide your own customized lncRNA expression matrix in TCGA cohorts. 
 
 An example of the customized lncRNA expression data frame or matrix should look like:
