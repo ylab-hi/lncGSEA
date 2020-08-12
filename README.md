@@ -206,5 +206,5 @@ Bug reports or feature requests can be submitted on the
 
 Citation
 -----------------
-Ren Y., Wang TY., Anderton LC., Cao Q. and Yang R. lncGSEA: an R package to infer lncRNA associated pathways from large-scale cancer transcriptome sequencing data. (Under Revision)
+Ren Y., Wang TY., Anderton LC., Cao Q. and Yang R. lncGSEA: an R package to infer lncRNA associated pathways from large-scale cancer transcriptome sequencing data. (Submitted)
 
