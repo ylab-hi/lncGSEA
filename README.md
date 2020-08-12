@@ -195,5 +195,16 @@ plot_gsea("PB.69_PRAD_cor.txt")
 ![PB69 example](https://user-images.githubusercontent.com/25854857/88564875-66662d00-cff9-11ea-9f92-31a577d90ff4.png)
 
 
+License
+----------------
+The project is licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
+Contact
+-----------------
+Bug reports or feature requests can be submitted on the 
+<a href="https://github.com/ylab-hi/lncGSEA/issues">lncGSEA Github page</a>.
+
+Citation
+-----------------
+Ren Y., Wang TY., Anderton LC., Cao Q. and Yang R. lncGSEA: an R package to infer lncRNA associated pathways from large-scale cancer transcriptome sequencing data. (Under Revision)
 
