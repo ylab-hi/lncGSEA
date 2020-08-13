@@ -6,7 +6,8 @@
 <img align="left" width="280" src="images/lego-1.png" alt="tool logo">
 lncGSEA is a convenient tool to predict the lncRNA associated pathways through Gene Set Enrichment Analysis (GSEA) of gene expression profiles from large-scale cancer patient samples. 
 
-
+##
+lncGSEA is developed at [Rendong Yang Lab](https://www.hi.umn.edu/portfolio-items/rendong-yang/) at [The Hormel Institute, University of Minnesota](https://www.hi.umn.edu/).
 
 ## Workflow
 
