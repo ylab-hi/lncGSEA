@@ -162,9 +162,6 @@ arlnc1.df <- pre_multiCompare(files = list("ENST00000561519_PRAD_cor.txt",
 plot_multiCompare(arlnc1.df)
 
 ```
-
-![ARLNC1_3cohorts_ht](https://user-images.githubusercontent.com/25854857/88564266-9fea6880-cff8-11ea-9037-a20454480122.png)
-
 <div align="center">
 <img align="center" src="images/ARLNC1_3cohorts_ht.png" alt="visualization example" width="750" height="600">
 </div>
@@ -182,7 +179,9 @@ prad <- pre_multiCompare(files = list("ENST00000625256_PRAD_cor.txt",
 plot_multiCompare(prad)
 ```
 
-![multiple_lncRNA_prad](https://user-images.githubusercontent.com/25854857/88564437-d58f5180-cff8-11ea-860d-21a387124036.png)
+<div align="center">
+<img align="center" src="images/multiple_lncRNA_prad.png" alt="visualization example" width="750" height="600">
+</div>
 
 ## An example of lncRNA expression matrix provided by user
 If you have an interested lncRNA which has not been included in those two databases yet, you can provide your own customized lncRNA expression matrix in TCGA cohorts. 
@@ -210,7 +209,9 @@ plot_gsea("PB.69_PRAD_cor.txt")
 
 ```
 
-![PB69 example](https://user-images.githubusercontent.com/25854857/88564875-66662d00-cff9-11ea-9f92-31a577d90ff4.png)
+<div align="center">
+<img align="center" src="images/PB69.example.png" alt="visualization example" width="400" height="400">
+</div>
 
 
 License
