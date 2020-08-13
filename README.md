@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/ylab-hi/lncGSEA.svg?branch=master)](https://travis-ci.com/ylab-hi/lncGSEA)
 [![Build status](https://ci.appveyor.com/api/projects/status/s7kxsv678ltwps39?svg=true)](https://ci.appveyor.com/project/ynren1020/lncgsea)
 
-<img align="left" width="280" src="images/Picture1.png" alt="tool logo">
+<img align="left" width="280" src="images/Picture2.png" alt="tool logo">
 lncGSEA is a convenient tool to predict the lncRNA associated pathways through Gene Set Enrichment Analysis (GSEA) of gene expression profiles from large-scale cancer patient samples. 
 
 ##
