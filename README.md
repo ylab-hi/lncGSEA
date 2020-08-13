@@ -128,6 +128,12 @@ By setting `pathway = "HALLMARK_ANDROGEN_RESPONSE"` in `lnc_gsea`, you can have 
 <img width="576" alt="Screen Shot 2020-07-27 at 10 59 42 AM" src="https://user-images.githubusercontent.com/25854857/88564082-66196200-cff8-11ea-90b4-47c93d59c303.png">
 
 
+<div align="center">
+<img align="center" src="images/HALLMARK_ANDROGEN_RESPONSE_ENST00000561519.png" alt="visualization example" width="280" height="300">
+</div>
+
+
+
 #### 3.1 Visualize enriched pathway results by applying `plot_gsea` to a saved *.txt output from `lnc_gsea`
 
 One can provide a customized gene pathways to be labelled in the plot by setting pathway.list = "pathway you want to label", the name of the gene pathways should be the same as the pathways in the gene set gmt file you have used in `lnc_gsea`. For example, if you want to label "HALLMARK_ANDROGEN_RESPONSE", you can set pathway.list = "HALLMARK_ANDROGEN_RESPONSE", or if you want to label multiple pathways, you can set pathway.list = c("HALLMARK_ANDROGEN_RESPONSE", "HALLMARK_FATTY_ACID_METABOLISM"). If pathway.list = NULL, by default, it will label top/bottom 3 pathways. You can choose how many pathways you want to label by n, by default n = 3. You also have the flexibility of choosing positive ("pos") or negative ("neg") or both ("both") enriched pathways to label. 
