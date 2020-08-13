@@ -142,6 +142,10 @@ plot_gsea("ENST00000561519.5_PRAD_cor.txt", direction = "both")
 
 ![ARLNC1_plot_example](https://user-images.githubusercontent.com/25854857/88563135-387fe900-cff7-11ea-98c4-43f7498e7900.png)
 
+<div align="center">
+<img align="center" src="images/ARLNC1_plot_example.png" alt="visualization example" width="380" height="400">
+</div>
+
 
 #### 3.2 Compare one lncRNA's regulated pathways in different studies 
 
