@@ -166,7 +166,7 @@ plot_multiCompare(arlnc1.df)
 ![ARLNC1_3cohorts_ht](https://user-images.githubusercontent.com/25854857/88564266-9fea6880-cff8-11ea-9037-a20454480122.png)
 
 <div align="center">
-<img align="center" src="images/ARLNC1_3cohorts_ht.png" alt="visualization example" width="700" height="600">
+<img align="center" src="images/ARLNC1_3cohorts_ht.png" alt="visualization example" width="800" height="600">
 </div>
 
 
