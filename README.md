@@ -165,6 +165,11 @@ plot_multiCompare(arlnc1.df)
 
 ![ARLNC1_3cohorts_ht](https://user-images.githubusercontent.com/25854857/88564266-9fea6880-cff8-11ea-9037-a20454480122.png)
 
+<div align="center">
+<img align="center" src="images/ARLNC1_3cohorts_ht.png" alt="visualization example" width="700" height="600">
+</div>
+
+
 #### 3.3 Study multiple lncRNAs' regulatory pathway in one cancer 
 
 Similarly, you can collectively compare multiple lncRNAs regulatory enriched pathway in one cancer. Here suppose you already have results from `lnc_gsea` for the list of interested lncRNAs. You can obtain a similar plot by running the following functions:
